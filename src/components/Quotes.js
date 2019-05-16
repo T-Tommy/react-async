@@ -6,11 +6,11 @@ function Quotes({ quotes }) {
   const quoteList = quotes.map(({ character, quote, image }) => (
     <Quote key={ quote } character={ character } quote={ quote } image={ image } />
   ));
-  
+
   return (
-    <ul>
+    <section>
       {quoteList}
-    </ul>
+    </section>
   );
 }
 
