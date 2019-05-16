@@ -11,10 +11,14 @@ export default class TopQuotes extends PureComponent {
   state = {
     quotes: []
   }
-  
+
   fetchQuotes = () => getQuotes(this.props.count)
     .then(quotes => this.setState({ quotes }));
   
+  componentDidMount() {
+    this.fetchQuotes();
+  }
+
   render() {
     return (
       <>
