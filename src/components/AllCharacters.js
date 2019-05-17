@@ -4,16 +4,31 @@ import getCharacters from '../services/rick-and-morty-api';
 
 export default class AllCharacters extends PureComponent {
   state = {
+    page: 1,
     characters: []
   }
-
+  
+  fetchCharacters = () => getCharacters(this.state.page).then(characters => this.setState({ characters }));
+  
+  nextPage = () => this.setState(state => ({ page: state.page + 1 }));
+  
   componentDidMount() {
-    getCharacters().then(characters => this.setState({ characters }));
+    this.fetchCharacters();
   }
+
+  componentDidUpdate(_, prevState) {
+    if(this.state.page !== prevState.page) {
+      this.fetchCharacters();
+    }
+  }
+
 
   render() {
     return (
-      <Characters { ...this.state } />
+      <>
+        <button onClick={this.nextPage}>Next Page</button>
+        <Characters { ...this.state } />
+      </>
     );
   }
 }
