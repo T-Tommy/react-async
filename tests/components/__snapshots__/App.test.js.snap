@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component renders the App 1`] = `
+<ErrorBoundary>
+  <AllCharacters />
+</ErrorBoundary>
+`;
