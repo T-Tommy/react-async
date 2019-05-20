@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react';
 import addErrorBoundary from './addErrorBoundary';
 import Select from './Select';
 import AllCharacters from '../containers/AllCharacters';
+import AllLocations from '../containers/AllLocations';
 const AllCharactersWithErrorBoundary = addErrorBoundary(AllCharacters);
+const AllLocationsWithErrorBoundary = addErrorBoundary(AllLocations);
 
 export default class App extends PureComponent {
   state = {
@@ -15,7 +17,8 @@ export default class App extends PureComponent {
     return (
       <>
         <Select selectHandler={ this.selectHandler } />
-        <AllCharactersWithErrorBoundary />
+        { this.state.select === 'Character' && <AllCharactersWithErrorBoundary />}
+        { this.state.select === 'Location' && <AllLocationsWithErrorBoundary />}
       </>
     );
   }

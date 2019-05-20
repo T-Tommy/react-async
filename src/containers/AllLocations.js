@@ -1,37 +1,37 @@
 import React, { PureComponent } from 'react';
-import Characters from '../components/Characters';
+import Locations from '../components/Locations';
 import Paging from '../components/Paging';
 import Loading from '../components/Loading';
-import { getCharacters } from '../services/rick-and-morty-api';
+import { getLocations } from '../services/rick-and-morty-api';
 
-export default class AllCharacters extends PureComponent {
+export default class AllLocations extends PureComponent {
   state = {
     page: 1,
     totalPages: 1,
-    characters: [],
+    locations: [],
     loading: true
   }
-  
-  fetchCharacters = () => {
+
+  fetchLocations = () => {
     this.setState({ loading: true });
-    getCharacters(this.state.page).then(([totalPages, characters]) => this.setState({ totalPages, characters, loading: false }));
+    getLocations(this.state.page).then(([totalPages, locations]) => this.setState({ totalPages, locations, loading: false }));
   }
-  
+
   updatePage = page => this.setState(() => ({ page }));
-  
+
   componentDidMount() {
-    this.fetchCharacters();
+    this.fetchLocations();
   }
 
   componentDidUpdate(_, prevState) {
     if(this.state.page !== prevState.page) {
-      this.fetchCharacters();
+      this.fetchLocations();
     }
   }
 
   render() {
     const {
-      characters,
+      locations,
       page,
       totalPages,
       loading
@@ -41,12 +41,12 @@ export default class AllCharacters extends PureComponent {
 
     return (
       <>
-        <Paging 
-          updatePage={ this.updatePage } 
-          page={ page } 
+        <Paging
+          updatePage={ this.updatePage }
+          page={ page }
           totalPages={ totalPages }
         />
-        <Characters characters={ characters } />
+        <Locations locations={ locations } />
       </>
     );
   }
