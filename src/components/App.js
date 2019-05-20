@@ -1,12 +1,11 @@
 import React from 'react';
-import ErrorBoundary from './ErrorBoundary';
+import addErrorBoundary from './withErrorBoundary';
 import AllCharacters from '../containers/AllCharacters';
+const AllCharactersWithErrorBoundary = addErrorBoundary(AllCharacters);
 
 function App() {
   return (
-    <ErrorBoundary>
-      <AllCharacters />
-    </ErrorBoundary>
+    <AllCharactersWithErrorBoundary />
   );
 }
 
