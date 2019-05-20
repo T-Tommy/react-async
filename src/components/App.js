@@ -1,12 +1,22 @@
-import React from 'react';
-import addErrorBoundary from './withErrorBoundary';
+import React, { PureComponent } from 'react';
+import addErrorBoundary from './addErrorBoundary';
+import Select from './Select';
 import AllCharacters from '../containers/AllCharacters';
 const AllCharactersWithErrorBoundary = addErrorBoundary(AllCharacters);
 
-function App() {
-  return (
-    <AllCharactersWithErrorBoundary />
-  );
-}
+export default class App extends PureComponent {
+  state = {
+    select: 'Character'
+  }
 
-export default App;
+  selectHandler = ({ target }) => this.setState({ select: target.value })
+
+  render() {
+    return (
+      <>
+        <Select selectHandler={ this.selectHandler } />
+        <AllCharactersWithErrorBoundary />
+      </>
+    );
+  }
+}
