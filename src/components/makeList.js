@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Character from './Character';
-import Location from './Location';
+import fields from '../services/selectFields';
 
 function makeList(Component) {
   return class List extends PureComponent {
@@ -22,7 +21,4 @@ function makeList(Component) {
   };
 }
 
-export default {
-  Characters: makeList(Character),
-  Locations: makeList(Location)
-};
+export default Object.keys(fields).reduce((acc, cur) => ({ ...acc, [`${cur}s`]: makeList(fields[cur]) }), {});

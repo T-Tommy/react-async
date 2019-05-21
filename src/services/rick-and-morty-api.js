@@ -7,4 +7,4 @@ function makeFetcher(field) {
       .then(json => [json.info.pages, json.results]);
 }
 
-export default fields.reduce((acc, cur) => ({ ...acc, [`${cur.toLowerCase()}s`]: makeFetcher(cur) }), {});
+export default Object.keys(fields).reduce((acc, cur) => ({ ...acc, [`${cur.toLowerCase()}s`]: makeFetcher(cur) }), {});

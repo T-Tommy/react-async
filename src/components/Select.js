@@ -6,7 +6,7 @@ function Select({ selectHandler }) {
   return (
     <select onChange={ selectHandler }>
       {
-        fields.map(field => (
+        Object.keys(fields).map(field => (
           <option key={ field } value={ field }>
             { field }
           </option>
