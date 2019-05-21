@@ -1,11 +1,10 @@
-export function getCharacters(page = 1) {
-  return fetch(`https://rickandmortyapi.com/api/character/?page=${page}`)
-    .then(res => res.json())
-    .then(json => [json.info.pages, json.results]);
+import fields from './selectFields';
+
+function makeFetcher(field) {
+  return (page = 1) =>
+    fetch(`https://rickandmortyapi.com/api/${field.toLowerCase()}/?page=${page}`)
+      .then(res => res.json())
+      .then(json => [json.info.pages, json.results]);
 }
 
-export function getLocations(page = 1) {
-  return fetch(`https://rickandmortyapi.com/api/location/?page=${page}`)
-    .then(res => res.json())
-    .then(json => [json.info.pages, json.results]);
-}
+export default fields.reduce((acc, cur) => ({ ...acc, [`${cur.toLowerCase()}s`]: makeFetcher(cur) }), {});
