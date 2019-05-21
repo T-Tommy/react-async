@@ -14,7 +14,7 @@ export default class AllLocations extends PureComponent {
     loading: true
   }
 
-  fetchLocations = () => {
+  fetch = () => {
     this.setState({ loading: true });
     fetchApi.locations(this.state.page).then(([totalPages, results]) => this.setState({ totalPages, results, loading: false }));
   }
@@ -22,12 +22,12 @@ export default class AllLocations extends PureComponent {
   updatePage = page => this.setState(() => ({ page }));
 
   componentDidMount() {
-    this.fetchLocations();
+    this.fetch();
   }
 
   componentDidUpdate(_, prevState) {
     if(this.state.page !== prevState.page) {
-      this.fetchLocations();
+      this.fetch();
     }
   }
 

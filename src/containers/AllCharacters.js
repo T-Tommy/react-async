@@ -14,7 +14,7 @@ export default class AllCharacters extends PureComponent {
     loading: true
   }
 
-  fetchCharacters = () => {
+  fetch = () => {
     this.setState({ loading: true });
     fetchApi.characters(this.state.page).then(([totalPages, results]) => this.setState({ totalPages, results, loading: false }));
   }
@@ -22,12 +22,12 @@ export default class AllCharacters extends PureComponent {
   updatePage = page => this.setState(() => ({ page }));
 
   componentDidMount() {
-    this.fetchCharacters();
+    this.fetch();
   }
 
   componentDidUpdate(_, prevState) {
     if(this.state.page !== prevState.page) {
-      this.fetchCharacters();
+      this.fetch();
     }
   }
 
