@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Character({ name, status, species, image }) {
+function Character({ result }) {
+  const { name, image, status, species } = result;
   return (
     <li>
       <h2>{ name }</h2>
@@ -13,10 +14,7 @@ function Character({ name, status, species, image }) {
 }
 
 Character.propTypes = {
-  name: PropTypes.string,
-  status: PropTypes.string,
-  species: PropTypes.string,
-  image: PropTypes.string
+  result: PropTypes.object.isRequired
 };
 
 export default Character;

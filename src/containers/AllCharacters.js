@@ -1,24 +1,26 @@
 import React, { PureComponent } from 'react';
-import Characters from '../components/Characters';
+import Lists from '../components/makeList';
 import Paging from '../components/Paging';
 import Loading from '../components/Loading';
-import { getCharacters } from '../services/rick-and-morty-api';
+import fetchApi from '../services/rick-and-morty-api';
+
+const { Characters } = Lists;
 
 export default class AllCharacters extends PureComponent {
   state = {
     page: 1,
     totalPages: 1,
-    characters: [],
+    results: [],
     loading: true
   }
-  
+
   fetchCharacters = () => {
     this.setState({ loading: true });
-    getCharacters(this.state.page).then(([totalPages, characters]) => this.setState({ totalPages, characters, loading: false }));
+    fetchApi.characters(this.state.page).then(([totalPages, results]) => this.setState({ totalPages, results, loading: false }));
   }
-  
+
   updatePage = page => this.setState(() => ({ page }));
-  
+
   componentDidMount() {
     this.fetchCharacters();
   }
@@ -31,7 +33,7 @@ export default class AllCharacters extends PureComponent {
 
   render() {
     const {
-      characters,
+      results,
       page,
       totalPages,
       loading
@@ -41,12 +43,12 @@ export default class AllCharacters extends PureComponent {
 
     return (
       <>
-        <Paging 
-          updatePage={ this.updatePage } 
-          page={ page } 
+        <Paging
+          updatePage={ this.updatePage }
+          page={ page }
           totalPages={ totalPages }
         />
-        <Characters characters={ characters } />
+        <Characters results={ results } />
       </>
     );
   }

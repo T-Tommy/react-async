@@ -1,20 +1,22 @@
 import React, { PureComponent } from 'react';
-import Locations from '../components/Locations';
+import Lists from '../components/makeList';
 import Paging from '../components/Paging';
 import Loading from '../components/Loading';
-import { getLocations } from '../services/rick-and-morty-api';
+import fetchApi from '../services/rick-and-morty-api';
+
+const { Locations } = Lists;
 
 export default class AllLocations extends PureComponent {
   state = {
     page: 1,
     totalPages: 1,
-    locations: [],
+    results: [],
     loading: true
   }
 
   fetchLocations = () => {
     this.setState({ loading: true });
-    getLocations(this.state.page).then(([totalPages, locations]) => this.setState({ totalPages, locations, loading: false }));
+    fetchApi.locations(this.state.page).then(([totalPages, results]) => this.setState({ totalPages, results, loading: false }));
   }
 
   updatePage = page => this.setState(() => ({ page }));
@@ -31,7 +33,7 @@ export default class AllLocations extends PureComponent {
 
   render() {
     const {
-      locations,
+      results,
       page,
       totalPages,
       loading
@@ -46,7 +48,7 @@ export default class AllLocations extends PureComponent {
           page={ page }
           totalPages={ totalPages }
         />
-        <Locations locations={ locations } />
+        <Locations results={ results } />
       </>
     );
   }

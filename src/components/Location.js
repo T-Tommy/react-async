@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Location({ name, type, dimension }) {
+function Location({ result }) {
+  const { name, type, dimension } = result;
   return (
     <li>
       <h2>{ name }</h2>
@@ -12,9 +13,7 @@ function Location({ name, type, dimension }) {
 }
 
 Location.propTypes = {
-  name: PropTypes.string,
-  type: PropTypes.string,
-  dimension: PropTypes.string
+  result: PropTypes.string.isRequired
 };
 
 export default Location;
