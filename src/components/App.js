@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import addErrorBoundary from './addErrorBoundary';
+import addErrorBoundary from './ErrorBoundary';
 import Select from './Select';
 import AllCharacters from '../containers/AllCharacters';
 import AllLocations from '../containers/AllLocations';
