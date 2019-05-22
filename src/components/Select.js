@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import fields from '../services/selectFields';
 
-function Select({ selectHandler }) {
+export default function Select({ selectHandler }) {
   return (
     <select onChange={ selectHandler }>
       {
@@ -19,5 +19,3 @@ function Select({ selectHandler }) {
 Select.propTypes = {
   selectHandler: PropTypes.func.isRequired
 };
-
-export default Select;

@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react';
-import addErrorBoundary from './ErrorBoundary';
 import Select from './Select';
-import Containers from '../containers/makeContainer';
-
-const ContainersWithErrorBoundary = Containers.reduce((acc, cur) => ({ ...acc, [cur.displayName]: addErrorBoundary(cur) }), {});
+import Containers from './pipeline';
 
 export default class App extends PureComponent {
   state = {
@@ -13,7 +10,7 @@ export default class App extends PureComponent {
   selectHandler = ({ target }) => this.setState({ select: target.value })
 
   render() {
-    const Container = ContainersWithErrorBoundary[`All${this.state.select}s`];
+    const Container = Containers[`All${this.state.select}s`];
     return (
       <>
         <Select selectHandler={this.selectHandler} />

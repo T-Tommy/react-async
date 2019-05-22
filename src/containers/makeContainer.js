@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
-import Lists from '../components/makeList';
 import Paging from '../components/Paging';
 import Loading from '../components/Loading';
 import fetchApi from '../services/rick-and-morty-api';
 
-function makeContainer(ListComponent) {
+export default function makeContainer(ListComponent) {
   return class Container extends PureComponent {
     static displayName = `All${ListComponent.displayName}`
     state = {
@@ -55,5 +54,3 @@ function makeContainer(ListComponent) {
     }
   };
 }
-
-export default Lists.map(ListComponent => makeContainer(ListComponent));

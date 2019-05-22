@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import fields from '../services/selectFields';
 
-function makeList(Component) {
+export default function makeList(Component) {
   return class List extends PureComponent {
     static propTypes = {
       results: PropTypes.array.isRequired
@@ -23,5 +22,3 @@ function makeList(Component) {
     }
   };
 }
-
-export default fields.map(field => makeList(field));
