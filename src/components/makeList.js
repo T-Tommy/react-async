@@ -8,7 +8,7 @@ function makeList(Component) {
       results: PropTypes.array.isRequired
     }
 
-    displayName = `${Component.displayName}s`
+    static displayName = `${Component.displayName}s`
 
     render() {
       const list = this.props.results.map(result => (

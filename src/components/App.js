@@ -3,7 +3,7 @@ import addErrorBoundary from './ErrorBoundary';
 import Select from './Select';
 import Containers from '../containers/makeContainer';
 
-const ContainersWithErrorBoundary = Containers.reduce((acc, cur) => ({ ...acc, [(new cur).displayName]: addErrorBoundary(cur) }), {});
+const ContainersWithErrorBoundary = Containers.reduce((acc, cur) => ({ ...acc, [cur.displayName]: addErrorBoundary(cur) }), {});
 
 export default class App extends PureComponent {
   state = {

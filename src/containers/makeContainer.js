@@ -6,7 +6,7 @@ import fetchApi from '../services/rick-and-morty-api';
 
 function makeContainer(ListComponent) {
   return class Container extends PureComponent {
-    displayName = `All${(new ListComponent).displayName}`
+    static displayName = `All${ListComponent.displayName}`
     state = {
       page: 1,
       totalPages: 1,
@@ -16,7 +16,7 @@ function makeContainer(ListComponent) {
 
     fetch = () => {
       this.setState({ loading: true });
-      fetchApi[(new ListComponent).displayName.toLowerCase()](this.state.page)
+      fetchApi[ListComponent.displayName.toLowerCase()](this.state.page)
         .then(([totalPages, results]) => this.setState({ totalPages, results, loading: false }));
     }
 
