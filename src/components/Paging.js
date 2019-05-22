@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Paging({ updatePage, page, totalPages }) {
+export default function Paging({ updatePage, page, totalPages }) {
   return (
     <nav>
       <button onClick={ () => updatePage(page - 1) } disabled={ 1 === page }>{ '<<' }</button>
@@ -16,5 +16,3 @@ Paging.propTypes = {
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired
 };
-
-export default Paging;
