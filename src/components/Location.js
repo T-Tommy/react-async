@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Location({ result }) {
+export default function Location({ result }) {
   const { name, type, dimension } = result;
   return (
     <li>
@@ -13,7 +13,7 @@ function Location({ result }) {
 }
 
 Location.propTypes = {
-  result: PropTypes.string.isRequired
+  result: PropTypes.object.isRequired
 };
 
-export default Location;
+Location.displayName = 'Location';

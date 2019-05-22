@@ -1,0 +1,59 @@
+import React, { PureComponent } from 'react';
+import Lists from '../components/makeList';
+import Paging from '../components/Paging';
+import Loading from '../components/Loading';
+import fetchApi from '../services/rick-and-morty-api';
+
+function makeContainer(ListComponent) {
+  return class Container extends PureComponent {
+    displayName = `All${(new ListComponent).displayName}`
+    state = {
+      page: 1,
+      totalPages: 1,
+      results: [],
+      loading: true
+    }
+
+    fetch = () => {
+      this.setState({ loading: true });
+      fetchApi[(new ListComponent).displayName.toLowerCase()](this.state.page)
+        .then(([totalPages, results]) => this.setState({ totalPages, results, loading: false }));
+    }
+
+    updatePage = page => this.setState(() => ({ page }));
+
+    componentDidMount() {
+      this.fetch();
+    }
+
+    componentDidUpdate(_, prevState) {
+      if(this.state.page !== prevState.page) {
+        this.fetch();
+      }
+    }
+
+    render() {
+      const {
+        results,
+        page,
+        totalPages,
+        loading
+      } = this.state;
+
+      if(loading) return <Loading />;
+
+      return (
+        <>
+          <Paging
+            updatePage={this.updatePage}
+            page={page}
+            totalPages={totalPages}
+          />
+          <ListComponent results={results} />
+        </>
+      );
+    }
+  };
+}
+
+export default Lists.map(ListComponent => makeContainer(ListComponent));
